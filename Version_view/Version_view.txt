@@ -1,0 +1,62 @@
+block_title:{
+	title,
+},
+
+block_style: {
+	style: CSS,
+},
+
+block_nav_links:{
+	li: links,
+	a: modal_1,
+},
+
+block_sidenav_links:{
+	li: links,
+	a: modal_1,
+},
+
+block_body: {
+	section: {
+		color: blue grey,
+		card: {
+			row_1: {
+				text: version_name,
+				card: {
+					col: 6,
+					content: details about the instance,
+					button: delete_instance,
+				},
+				card: {
+					col: 6,
+					content: details about the instance,
+					button: delete_instance,
+				},
+				card: {
+					col: 6,
+					content: details about the instance,
+					button: delete_instance,
+				},
+				button: delete_version,
+			},
+			row_2: {
+				text: version_name,
+				card: {
+					col: 6,
+					content: details about the instance,
+					button: delete_instance,
+				},
+				button: delete_version,
+			},
+		},
+	},
+},
+
+block_footer_links:{
+	li: links,
+	a: modal_1,
+},
+
+block_script: {
+	script: JS,
+},

@@ -1,0 +1,91 @@
+block_title:{
+	title,
+},
+
+block_style: {
+	style: CSS,
+},
+
+block_nav_links:{
+	li: links,
+	a: modal_1,
+},
+
+block_sidenav_links:{
+	li: links,
+	a: modal_1,
+},
+
+block_body: {
+	modal_1{
+		color: indigo,
+		card_1:{
+			color: white,
+			form_1: Upload a new model, 
+		},
+	},
+	modal_2{
+		color: indigo,
+		card_1:{
+			color: white,
+			form_1: Clone an existing model, 
+		},
+	},
+	section: {
+		color: blue grey,
+		row_1: {
+			col_1: {
+				col: 4,
+				card: {
+					content: some_text,
+					button: upload_model,
+					button: clone_model,
+				}
+			},
+			col_2: {
+				col: 8,
+				row_1: {
+					card: {
+						col: 4,
+						content: info about the model,
+						button: delete,
+					},
+					card: {
+						col: 4,
+						content: info about the model,
+						button: delete,
+					},
+					card: {
+						col: 4,
+						content: info about the model,
+						button: delete,
+					},
+					card: {
+						col: 4,
+						content: info about the model,
+						button: delete,
+					},
+					card: {
+						col: 4,
+						content: info about the model,
+						button: delete,
+					},
+					card: {
+						col: 4,
+						content: info about the model,
+						button: delete,
+					},
+				},
+			},
+		},
+	},
+},
+
+block_footer_links:{
+	li: links,
+	a: modal_1,
+},
+
+block_script: {
+	script: JS,
+},

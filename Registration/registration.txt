@@ -1,0 +1,40 @@
+block_title:{
+	title,
+},
+
+block_style: {
+	style: CSS,
+},
+
+block_nav_links:{
+	li: links,
+},
+
+block_sidenav_links:{
+	li: links,
+},
+
+block_body: {
+	parallax: {
+		card: {
+			color: white,
+			form: {
+				text: username,
+				text: email_id,
+				text: first_name,
+				text: last_name,
+				password: password,
+				button: submit,
+			},
+		},
+	},
+},
+
+block_footer_links:{
+	li: links,
+	a: modal_1,
+},
+
+block_script: {
+	script: form_validation,
+},

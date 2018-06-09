@@ -1,0 +1,81 @@
+block_title:{
+	title,
+},
+
+block_style: {
+	style: CSS,
+},
+
+block_nav_links:{
+	li: links,
+	a: modal_1,
+},
+
+block_sidenav_links:{
+	li: links,
+	a: modal_1,
+},
+
+block_body: {
+	modal_1{
+		color: indigo,
+		card_1:{
+			color: white,
+			form_1: User login and signin redirect, 
+		},
+	},
+	slider:{
+		count: 3,
+		text: white,
+	},
+	container_1:{
+		color: blue-grey,
+		card_1:{
+			color: white,
+			col: 4,
+			content: Text about the website (mainly login),
+		},
+		card_2:{
+			color: white,
+			col: 4,
+			content: Text about the website,
+		},
+		card_3:{
+			color: white,
+			col: 4,
+			content: Text about the website,
+		},
+	},
+	section_1:{
+		image:{
+			shape: circle,
+			col: 4,
+		},
+		card:{
+			col: 8,
+			content: Text about the website,
+		},
+	},
+	container_2:{
+		color: blue-gray,
+		card_1:{
+			color: white,
+			col: 4,
+			content: Text about the website,
+		},
+		card_2:{
+			color: white,
+			col: 8,
+			content: Text about the website,
+		},
+	},
+}
+
+block_footer_links:{
+	li: links,
+	a: modal_1,
+},
+
+block_script: {
+	script: JS,
+},
