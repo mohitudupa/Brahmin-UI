@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <!--{% block title %} -->
+  <title>Register</title>
+  <!-- {% endblock %} -->
+  <!-- CSS  -->
+  <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<style>
+/*{% block style %}*/
+#logo-container{
+  font-family: 'Satisfy',cursive;
+}
+.icontainer{
+  background-image: url("parallax1.jpg");
+}
+/*{% endblock %}*/
+</style>
+</head>
+<!-- {% block body %}-->
+<body background="back1.jpg">
+  <!-- {% block nav %}-->
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">logo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">elemen1</a></li>
+        <li>
+          <a href="#">Login</a>
+        </li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Element 1</a></li>
+        <li>
+          <a href="#">Login</a>
+        </li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <!--{% endblock %} -->
+  <div class="icontainer" style="overflow:auto">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+        <!--  <h3 class="header col s12 light"><span class="indigo-text text-darken-1">Official marketing partners of all things OnePlus</span></h3> -->
+        <div class="row">
+          <div class="col m12">
+            <div class="card amber lighten-5">
+              <div class="card-content green-text">
+                <span class="card-title">Register</span>
+                  <div class="row">
+                  <form class="col s12" id="register">
+                    <div class="row">
+                      <div class="input-field col s6">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <input id="fname" type="text" class="validate" required>
+                        <label for="fname">First Name</label>
+                      </div>
+                      <div class="input-field col s6 ">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <input id="lname" type="text" class="validate" required>
+                        <label for="lname">Last Name</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <i class="material-icons prefix">person</i>
+                        <input id="uname" type="text" class="validate" required>
+                        <label for="uname">User Name</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <i class="material-icons prefix">local_post_office</i>
+                        <input id="email" type="email" class="validate" required>
+                        <label for="email">Email</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <i class="material-icons prefix">lock_outline</i>
+                        <input id="password" type="password" class="validate" pattern=".{8,}" required>
+                        <label for="password">Password</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <i class="material-icons prefix">lock</i>
+                        <input id="cpassword" type="password" class="validate" pattern=".{8,}" required>
+                        <label for="cpassword">Confirm Password</label>
+                      </div>
+                    </div>
+                    <button class="btn waves-effect waves-light" type="submit" name="submit" onclick="validate()">Submit
+                     <i class="material-icons right">send</i>
+                   </button>
+                  </form>
+                  <br / > <br />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <br /><br /><br /><br />
+    <!-- {% block footer %}-->
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Bio</h5>
+          <p class="grey-text text-lighten-4">We are a team of college students working on this project. Any amount that would help support and continue development on this project is greatly appreciated.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+<!--{% endblock %} -->
+
+  <!--  {% block script %}-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script>
+  //error
+    function validate(){
+             const form = document.getElementById("register");
+             var password = document.getElementById("password");
+             var confpassword = document.getElementById("cpassword");
+             if(password != cpassword){
+                 M.toast({html: 'Password mismatch'});
+                 return;
+             }
+             form.submit();
+         }
+  </script>
+<!--{% endblock %} -->
+<!--{% endblock %} -->
+  </body>
+</html>
