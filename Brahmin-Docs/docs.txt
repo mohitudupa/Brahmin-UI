@@ -1,0 +1,685 @@
+Regular expressions used:
+Regular expressions will be mentioned as a regex list in each function call
+  number = r'^[0-9]+$' ---- signifies one or more numbers(0-9)
+  name = r'^[a-zA-Z\' -]+$' ---- signifies one or more letters(a-z)
+  email = r'^.+@.+\..+$' ---- signifies email id
+  password = r'^.{8}' ---- signifies password containing 8 or more characters
+  text = r'^.+$' ---- signinfies one or more characters
+  boolean = r'^(True)$|(False)$' ---- signifies bool values(true or false)
+  array = r'^\[(.*)*\]$'  ---- signifies a numpy array(eg: a=([1,2,4,3]))
+  date_format = r'^[0-3][0-9]-[0-1][0-9]-[0-9]{4}$' ---- signifies date in dd-mm-yyyy format
+
+
+Registration:
+A user registers to the site using this api call.
+
+  API:
+    Api token  : not required and a new one will be generated on successful registration.
+    Api call invocation : "register/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["first_name", "last_name", "email", "password", "username"]
+    regex = [name, name, email, password, text]
+    types = [str, str, str, str, str]
+
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "email already exists" : Error type occurs when email id is already used by another registered user. The new user must use a different email id to register to the site.
+    "username already exists" : Error type occus when Username is already used by another registered user. The new user must use a different username to register to the site.
+    "The following values are required: first_name, last_name, username,password and email" : Error type occurs when the post data is missing keys and their values.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+
+  SUCCESS:
+  The Post data meets the defined standards.
+  The user is registered and a api token is generated to the user which should be used for future api calls to the site.
+
+
+Get Token:
+The preregistered user can get their api token via this api call.
+
+  API:
+    Api token  : required
+    Api call invocation : "gettoken/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["password", "username"]
+    regex = [password, name]
+    types = [str, str]
+
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "The following values are required: username and password" : Error type occurs when the post data is missing keys and their values.
+    "Invalid username or password" : Error type occus when username or password is incorrect.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+
+  SUCCESS:
+  On successful api call it returns the corresponding api token of the requested user.
+
+
+Change Password:
+The preregistered user can change their password using this api call.
+
+  API:
+    Api token  : required
+    Api call invocation : "changepassword/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["old_password", "new_password"]
+    regex = [password, password]
+    types = [str, str]
+
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: old_password and new_password" : Error type occurs when the post data is missing keys and their values.
+    "Invalid old password" : Error type occurs when old password doesn't match with that of existing password.
+  SUCCESS:
+  On successful api call it changes the existing password of the requested user and returns a success.
+
+
+Change Token:
+The preregistered user can change their token using this api call.
+  API:
+    Api token  : required
+    Api call invocation : "changetoken/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["password", "username"]
+    regex = [password, name]
+    types = [str, str]
+
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: username and password" : Error type occurs when the post data is missing keys and their values.
+    "Invalid username or password" : Error type occurs when old password doesn't match with that of existing password.
+  SUCCESS:
+  On successful api call it changes the existing token of the requested user and returns a success.
+
+
+
+Clone:
+The preregistered user can clone an existing model using this api call.
+  API:
+    Api token  : required
+    Api call invocation : "clone/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id"]
+    regex = [text]
+    types = [str]
+
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Instance does not exist" : Error type occurs when model of required id is not available or maybe in trash.
+    "Instance is private" : Error type occurs when a model to be cloned is made private by the master of the model.
+    "Invalid instance ID" : Error type occurs when id of model to be cloned is wrong.
+    "Model conflict occoured" : Error type occurs when name and version of new model already is assigned to another pre existing model.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it clones the existing model of the required id and returns the id of the cloned model.
+  A log entry for the cloned model is also initiated.
+
+
+Upload:
+The preregistered user can upload a new model into the site using this api call.
+  API:
+    Api token  : required
+    Api call invocation : "upload/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["name", "version", "pickle", "private", "docs"]
+    regex = [text, text, text, boolean, text]
+    types = [str, str, str, bool, str]
+
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Invalid pickle" : Error type occurs when post pickle data is not in valid format.
+    "Model conflict occoured" : Error type occurs when name and version of new model already is assigned to another pre existing model.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: name, version, pickle, private and docs" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it uploads the new model into the database and returns the id of the new model.
+  A log entry for the new model is also initiated.
+
+
+Update:
+The preregistered user can update an existing model using this api call.
+  API:
+    Api token  : required
+    Api call invocation : "update/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id", "new_name", "new_version", "new_private", "new_docs",description"]
+    regex = [text, text, text, boolean, text, text]
+    types = [str, str, str, bool, str, str]
+
+    All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+    RESPONSE TYPE:
+    ERROR:
+    Post data is not according to defined standards
+      ERROR TYPE:
+      "Instance does not exist" : Error type occurs when requested instance has been deleted.
+      "Model conflict occoured" : Error type occurs when name and version of new model already is assigned to another pre existing model.
+      "Invalid instance ID" : Error type occurs when id of model to be updated is wrong.
+      "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+      "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+      "The following values are required: id, new_name, new_version, new_private and new_docs and description" : Error type occurs when the post data is missing keys and their values.
+
+    SUCCESS:
+    On successful api call it updates the model and returns success.
+    A log entry for the model is also added.
+
+Delete:
+The preregistered user can delete an existing model using this api call.
+  API:
+    Api token  : required
+    Api call invocation : "delete/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id"]
+    regex = [text]
+    types = [str]
+
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Instance does not exist" : Error type occurs when requested instance has already been deleted.
+    "Invalid instance ID" : Error type occurs when id of model to be deleted is wrong.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it deletes the model from the user database and returns success of deletion.
+  A log entry for the model is also added.
+
+Restore:
+The preregistered user can delete an existing model using this api call.
+  API:
+    Api token  : required
+    Api call invocation : "restore/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id"]
+    regex = [text]
+    types = [str]
+
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Instance does not exist" : Error type occurs when requested instance has already been deleted.
+    "Invalid instance ID" : Error type occurs when id of model to be deleted is wrong.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it restores the model from the trash and returns success of restoration.
+  A log entry for the model is also added.
+
+
+Get Details:
+The preregistered user can get details of all existing models for which he is the owner using this api call.
+  API:
+  Api token  : required
+  Api call invocation : "getdetails/"
+  Api call type: POST
+
+  DATA FORMAT:
+  keys = ["trash"]
+  regex = [boolean]
+  types = [bool]
+
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: trash" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it fetches all the models from the database which the user owns.
+
+
+Get Names:
+The preregistered user can get names of all existing models for which he is the owner using this api call.
+  API:
+  Api token  : required
+  Api call invocation : "getnames/"
+  Api call type: POST
+
+  DATA FORMAT:
+  keys = ["trash"]
+  regex = [boolean]
+  types = [bool]
+
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: trash" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it fetches all the model names from the database which the user owns.
+
+
+Get versions:
+The preregistered user can get all versions of the existing model for which he is the owner using this api call.
+  API:
+    Api token  : required
+    Api call invocation : "getversions/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["name", "trash"]
+    regex = [text, boolean]
+    types = [str, bool]
+
+    All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+    RESPONSE TYPE:
+    ERROR:
+    Post data is not according to defined standards
+      ERROR TYPE:
+      "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+      "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+      "The following values are required: name, trash" : Error type occurs when the post data is missing keys and their values.
+
+    SUCCESS:
+    On successful api call it fetches all the model versions from the database which the user owns.
+
+
+
+//deprecated
+Get instances:
+//deprecated
+
+
+
+Get model:
+The preregistered user can get an existing model of a specific version for which he is the owner using this api call.
+
+  API:
+    Api token  : required
+    Api call invocation : "getmodel/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id"]
+    regex = [text]
+    types = [str]
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Instance does not exist" : Error type occurs when model of required id is not available or maybe has been deleted.
+    "Instance is private" : Error type occurs when a model to be fetched is made private by the master of the model.
+    "Invalid instance ID" : Error type occurs when id of model to be fetched is wrong.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it fetches the model version from the database.
+
+Get Log:
+The preregistered user can get logs of a specific model using this api call.
+
+  API:
+    Api token  : required
+    Api call invocation : "getlog/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id"]
+    regex = [text]
+    types = [str]
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Instance does not exist" : Error type occurs when model of required id is not available or maybe has been deleted.
+    "Invalid instance ID" : Error type occurs when id of model to be fetched is wrong.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it fetches the specific model logs from the database.
+
+Get User Log:
+The logged in user can get his logs using this api call.
+
+  API:
+    Api token  : required
+    Api call invocation : "getuserlog/"
+    Api call type: POST
+
+  DATA FORMAT:
+    None
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    NA
+  SUCCESS:
+  On successful api call it fetches the logged in user logs from the database.
+
+Get Date Log:
+The preregistered user can get logs of a specific date using this api call.
+
+  API:
+    Api token  : required
+    Api call invocation : "getdatelog/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["date"]
+    regex = [date_format]
+    types = [str]
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Invalid date" : Error type occurs when date is invalid.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it fetches the specific date logs from the database.
+
+Get Traceback:
+The preregistered user can get traceback history of a specific model using this api call.
+
+  API:
+    Api token  : required
+    Api call invocation : "gettraceback/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id"]
+    regex = [text]
+    types = [str]
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Instance does not exist" : Error type occurs when model of required id is not available or maybe has been deleted.
+    "Invalid instance ID" : Error type occurs when id of model to be traced back is wrong.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it fetches the specific models traceback history from the database useful for rollback.
+
+
+Train:
+The preregistered user can train and validate a specific model using this api call.
+This api call needs training and validation data to be uploaded via files.
+
+  API:
+    Api token  : required
+    Api call invocation : "train/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id", "split"]
+    regex = [text, number]
+    types = [str, str]
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Split must be between 10 and 100" : Error type occurs when percentage for train and validation data are inconsistent.
+    "Instance does not exist" : Error type occurs when model of required id is not available or maybe has been deleted.
+    "Invalid instance ID" : Error type occurs when id of model to be trained is wrong.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id, split, x_train, y_train" : Error type occurs when the post data is missing keys and their values.
+    "Invalid text encoding" : Error type occurs when text encoding in the uploaded file is invalid.
+     "A text file must be uploaded" : Error type occurs when file is not uploaded.
+
+  SUCCESS:
+  On successful api call it trains and validates the specific model.
+
+Test:
+The preregistered user can test the accuracy of specific model using this api call.
+This api call needs test data to be uploaded via files.
+
+  API:
+    Api token  : required
+    Api call invocation : "test/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id"]
+    regex = [text]
+    types = [str]
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Instance does not exist" : Error type occurs when model of required id is not available or maybe has been deleted.
+    "Invalid instance ID" : Error type occurs when id of model to be tested is wrong.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id, x_test, y_test" : Error type occurs when the post data is missing keys and their values.
+    "Invalid text encoding" : Error type occurs when text encoding in the uploaded file is invalid.
+     "A text file must be uploaded" : Error type occurs when file is not uploaded.
+
+  SUCCESS:
+  On successful api call it tests the accuracy of the specific model and updates the confidence of the model.
+
+Predict:
+The preregistered user can get predictions from specific trained model using this api call.
+This api call needs predict data to be uploaded via files.
+
+  API:
+    Api token  : required
+    Api call invocation : "predict/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id"]
+    regex = [text]
+    types = [str]
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Instance does not exist" : Error type occurs when model of required id is not available or maybe has been deleted.
+    "Invalid instance ID" : Error type occurs when id of model by which predictions are done is wrong.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id, x_predict" : Error type occurs when the post data is missing keys and their values.
+    "Invalid text encoding" : Error type occurs when text encoding in the uploaded file is invalid.
+     "A text file must be uploaded" : Error type occurs when file is not uploaded.
+
+  SUCCESS:
+  On successful api call the specific trained model gives predictions required.
+
+Commit:
+The preregistered user can commit changes to a specific model using this api call.
+
+  API:
+    Api token  : required
+    Api call invocation : "commit/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id", "description"]
+    regex = [text, test]
+    types = [str, str]
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Instance does not exist" : Error type occurs when model of required id is not available or maybe has been deleted.
+    "Invalid instance ID" : Error type occurs when id of model to be commited is wrong.
+    "Nothing to commit" : Error type occurs when no changes are amde to the existing version of the model.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id, description" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it commits changes to the specific model and saves it to the database.
+
+Discard:
+The preregistered user can discard changes done to a specific model by using this api call.
+
+  API:
+    Api token  : required
+    Api call invocation : "discard/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id"]
+    regex = [text]
+    types = [str]
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Instance does not exist" : Error type occurs when model of required id is not available or maybe has been deleted.
+    "Nothing to discard" : Error type occurs when no commits are done to the model.
+    "Invalid instance ID" : Error type occurs when id of model where changes are to discarded is wrong.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it discards the commits done to the specific model and updates the model.
+
+Rollback:
+The preregistered user can rollback changes done to a specific model by using this api call.
+
+  API:
+    Api token  : required
+    Api call invocation : "rollback/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id", "index"]
+    regex = [text, number]
+    types = [str, int]
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Instance does not exist" : Error type occurs when model of required id is not available or maybe has been deleted.
+    "Invalid rollback index" : Error type occurs when index in the traceback history to rollback to is invalid.
+    "Invalid instance ID" : Error type occurs when id of model where changes are to rollbacked is wrong.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id and index" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it rollbacks the commits done to the specific model and updates the model.
+
+Get Status:
+The preregistered user can get status of a specific model by using this api call.
+Using this call the user knows whether the models awaits commits or not.
+
+  API:
+    Api token  : required
+    Api call invocation : "getstatus/"
+    Api call type: POST
+
+  DATA FORMAT:
+    keys = ["id"]
+    regex = [text]
+    types = [str]
+  All keys and their values matching the specified regex and types should be specified in the post data of the api call.
+
+  RESPONSE TYPE:
+  ERROR:
+  Post data is not according to defined standards
+    ERROR TYPE:
+    "Instance does not exist" : Error type occurs when model of required id is not available or maybe has been deleted.
+    "Invalid instance ID" : Error type occurs when id of model whose status is required is wrong.
+    "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
+    "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
+    "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
+
+  SUCCESS:
+  On successful api call it shows whether the specific model awaits commits or not.
