@@ -1,0 +1,80 @@
+1) Making api calls to site without api token being generated yet or not knowing previously generated api token.
+
+  API calls: ['register/','gettoken/','changetoken/']
+
+  Example code : Registration api call
+
+    import requests
+    import json
+
+    host = "127.0.0.1:8000"
+
+    url = "http://" + host +"/model/api/register/"
+    headers = {"content-type": "application/json"}
+
+    data = {}
+    data["first_name"] = "Your First Name"
+    data["last_name"] = "Your Last Name"
+    data["email"] = "Your email id"
+    data["password"] = "Preferred password"
+    data["username"] = "Preferred Username"
+
+    r = requests.post(url = url, data = json.dumps(data), headers= headers)
+    print("response : "+r.text)
+
+2) Making api calls to site after registering to site and api token being generated. All these calls require api token for authentication.
+
+  API calls: ['changepassword/','clone/','upload/','update/','delete/','restore/','getdetails','getnames/','getversions/','getmodel/',
+              'getlog/','getdatelog/','getuserlog/','gettraceback/','commit/','discard/','rollback/','getstatus/']
+
+
+  Example code : Get Details api call:
+
+    import requests
+    import json
+
+    host = "127.0.0.1:8000"
+
+    url = "http://" + host +"/model/api/getdetails/"
+    headers = {"content-type": "application/json"}
+    headers["Authorization"] = "token " +"Your_api_token"
+
+    data ={}
+    data["trash"] = False
+
+    r = requests.post(url = url, data = json.dumps(data), headers= headers)
+    print("response : "+r.text)
+
+
+3) Making api calls to site after registration which involves file upload and api token for authentication.
+
+  APi calls: ['train/','test/','predict/']
+
+  Example code : Train api call.
+
+    import requests
+    import json
+
+    host = "127.0.0.1:8000"
+
+    url = "http://" + host +"/model/api/train/"
+    headers={}
+    headers["Authorization"] = "token " +"Your_api_token"
+
+    data= {}
+    files = {}
+    data["id"] = "Mongo_instance_id"
+    data["split"] = 70
+
+    files["x_train"] = open("file_name","r")
+    files["y_train"] = open("file_name","r")
+
+    r = requests.post(url = url,files=files, data = data, headers=headers)
+    print("response : "+r.text)
+
+
+KEY POINTS:
+  "host" : The domain name of the site in this case an ip address.
+  "data" : A dictionary containing all key-value pairs required for each api call. The keys are mentioned in the key list in DATA FORMAT of docs.
+  "url" : The absolute url to the site's api call and the api call is added in "/model/api/api_call/".
+  "files" : A dictionary containing all key-open_file pairs required for each api call. The keys are mentioned in the key list in FILE FORMAT of docs.

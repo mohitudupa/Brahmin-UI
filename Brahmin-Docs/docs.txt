@@ -44,7 +44,7 @@ Get Token:
 The preregistered user can get their api token via this api call.
 
   API:
-    Api token  : required
+    Api token  : not required
     Api call invocation : "gettoken/"
     Api call type: POST
 
@@ -91,6 +91,7 @@ The preregistered user can change their password using this api call.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: old_password and new_password" : Error type occurs when the post data is missing keys and their values.
     "Invalid old password" : Error type occurs when old password doesn't match with that of existing password.
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it changes the existing password of the requested user and returns a success.
 
@@ -98,7 +99,7 @@ The preregistered user can change their password using this api call.
 Change Token:
 The preregistered user can change their token using this api call.
   API:
-    Api token  : required
+    Api token  : not required
     Api call invocation : "changetoken/"
     Api call type: POST
 
@@ -117,6 +118,7 @@ The preregistered user can change their token using this api call.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: username and password" : Error type occurs when the post data is missing keys and their values.
     "Invalid username or password" : Error type occurs when old password doesn't match with that of existing password.
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it changes the existing token of the requested user and returns a success.
 
@@ -147,7 +149,7 @@ The preregistered user can clone an existing model using this api call.
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it clones the existing model of the required id and returns the id of the cloned model.
   A log entry for the cloned model is also initiated.
@@ -176,7 +178,7 @@ The preregistered user can upload a new model into the site using this api call.
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: name, version, pickle, private and docs" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it uploads the new model into the database and returns the id of the new model.
   A log entry for the new model is also initiated.
@@ -206,7 +208,7 @@ The preregistered user can update an existing model using this api call.
       "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
       "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
       "The following values are required: id, new_name, new_version, new_private and new_docs and description" : Error type occurs when the post data is missing keys and their values.
-
+      "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
     SUCCESS:
     On successful api call it updates the model and returns success.
     A log entry for the model is also added.
@@ -234,7 +236,7 @@ The preregistered user can delete an existing model using this api call.
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it deletes the model from the user database and returns success of deletion.
   A log entry for the model is also added.
@@ -262,7 +264,7 @@ The preregistered user can delete an existing model using this api call.
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it restores the model from the trash and returns success of restoration.
   A log entry for the model is also added.
@@ -289,7 +291,7 @@ The preregistered user can get details of all existing models for which he is th
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: trash" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it fetches all the models from the database which the user owns.
 
@@ -315,7 +317,7 @@ The preregistered user can get names of all existing models for which he is the 
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: trash" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it fetches all the model names from the database which the user owns.
 
@@ -341,7 +343,7 @@ The preregistered user can get all versions of the existing model for which he i
       "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
       "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
       "The following values are required: name, trash" : Error type occurs when the post data is missing keys and their values.
-
+      "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
     SUCCESS:
     On successful api call it fetches all the model versions from the database which the user owns.
 
@@ -377,7 +379,7 @@ The preregistered user can get an existing model of a specific version for which
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it fetches the model version from the database.
 
@@ -404,7 +406,7 @@ The preregistered user can get logs of a specific model using this api call.
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it fetches the specific model logs from the database.
 
@@ -449,7 +451,7 @@ The preregistered user can get logs of a specific date using this api call.
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it fetches the specific date logs from the database.
 
@@ -476,7 +478,7 @@ The preregistered user can get traceback history of a specific model using this 
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it fetches the specific models traceback history from the database useful for rollback.
 
@@ -496,6 +498,11 @@ This api call needs training and validation data to be uploaded via files.
     types = [str, str]
   All keys and their values matching the specified regex and types should be specified in the post data of the api call.
 
+  FILE FORMAT:
+    keys = ["x_train", "y_train"]
+    file_type = [csv, csv]
+  All files must be uploaded with the respective keys and  respective file types in post file data of the api call.
+
   RESPONSE TYPE:
   ERROR:
   Post data is not according to defined standards
@@ -507,8 +514,8 @@ This api call needs training and validation data to be uploaded via files.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: id, split, x_train, y_train" : Error type occurs when the post data is missing keys and their values.
     "Invalid text encoding" : Error type occurs when text encoding in the uploaded file is invalid.
-     "A text file must be uploaded" : Error type occurs when file is not uploaded.
-
+    "A text file must be uploaded" : Error type occurs when file is not uploaded.
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it trains and validates the specific model.
 
@@ -527,6 +534,11 @@ This api call needs test data to be uploaded via files.
     types = [str]
   All keys and their values matching the specified regex and types should be specified in the post data of the api call.
 
+  FILE FORMAT:
+    keys = ["x_test", "y_test"]
+    file_type = [csv, csv]
+  All files must be uploaded with the respective keys and  respective file types in post file data of the api call.
+
   RESPONSE TYPE:
   ERROR:
   Post data is not according to defined standards
@@ -538,7 +550,7 @@ This api call needs test data to be uploaded via files.
     "The following values are required: id, x_test, y_test" : Error type occurs when the post data is missing keys and their values.
     "Invalid text encoding" : Error type occurs when text encoding in the uploaded file is invalid.
      "A text file must be uploaded" : Error type occurs when file is not uploaded.
-
+     "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it tests the accuracy of the specific model and updates the confidence of the model.
 
@@ -557,6 +569,11 @@ This api call needs predict data to be uploaded via files.
     types = [str]
   All keys and their values matching the specified regex and types should be specified in the post data of the api call.
 
+  FILE FORMAT:
+    keys = ["x_predict"]
+    file_type = [csv]
+  All files must be uploaded with the respective keys and  respective file types in post file data of the api call.
+
   RESPONSE TYPE:
   ERROR:
   Post data is not according to defined standards
@@ -568,7 +585,7 @@ This api call needs predict data to be uploaded via files.
     "The following values are required: id, x_predict" : Error type occurs when the post data is missing keys and their values.
     "Invalid text encoding" : Error type occurs when text encoding in the uploaded file is invalid.
      "A text file must be uploaded" : Error type occurs when file is not uploaded.
-
+     "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call the specific trained model gives predictions required.
 
@@ -596,7 +613,7 @@ The preregistered user can commit changes to a specific model using this api cal
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: id, description" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it commits changes to the specific model and saves it to the database.
 
@@ -624,7 +641,7 @@ The preregistered user can discard changes done to a specific model by using thi
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it discards the commits done to the specific model and updates the model.
 
@@ -652,7 +669,7 @@ The preregistered user can rollback changes done to a specific model by using th
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: id and index" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it rollbacks the commits done to the specific model and updates the model.
 
@@ -680,6 +697,6 @@ Using this call the user knows whether the models awaits commits or not.
     "Invalid type for {key}" : Error type occurs when post data doesnt meet data type required for the key.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: id" : Error type occurs when the post data is missing keys and their values.
-
+    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
   SUCCESS:
   On successful api call it shows whether the specific model awaits commits or not.
