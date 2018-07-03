@@ -118,7 +118,7 @@ The preregistered user can change their token using this api call.
     "Invalid value for {key}": Error type occurs when post data doesnt meet the regex specified for the key.
     "The following values are required: username and password" : Error type occurs when the post data is missing keys and their values.
     "Invalid username or password" : Error type occurs when old password doesn't match with that of existing password.
-    "Authentication credentials were not provided" : Error type occurs when api token is not provided in the header of api call.
+    
   SUCCESS:
   On successful api call it changes the existing token of the requested user and returns a success.
 
